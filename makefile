@@ -1,4 +1,4 @@
-all: test_Prior.exe Distance_calc_wGRVS.exe
+all: test_Prior.exe Distance_calc_wGRVS.exe Prior_calc_anticentre.exe Distance_calc_anticentre.exe
 
 Prior.o : Prior.cc Prior.h
 	g++ -c -o $@ -O3 -ffast-math $<

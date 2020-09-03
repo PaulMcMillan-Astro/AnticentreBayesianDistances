@@ -240,3 +240,38 @@ double GRVS_prior::prior_mag() {
   return pm;
 
 }
+
+
+
+Anticentre_prior::Anticentre_prior() {
+  setup_basic();
+}
+
+void Anticentre_prior::setup_basic(){
+  // initial guess based on fit to p/ep>5 stars
+  //logscale = -1.1635621154541131; // data initial
+
+  logscale = -1.9746760143252673; // gogum initial
+  logscale = -1.325897540666271; // gogum iteration 1
+  logscale = -1.2087596366581825;
+}
+
+double Anticentre_prior::prior(double s_in)      // Return prior given s
+{
+  return Non_mag_prior.prior(s_in) * prior_select(s_in);
+}
+
+
+double Anticentre_prior::prior_select(double s_in)      // Return prior given s
+{
+  return exp(logscale*0.001*s_in);
+}
+
+
+/* ----- Setup sightline ------- */
+void Anticentre_prior::prepare_sightline(double l, double b) {
+    Non_mag_prior.prepare_sightline(l,b);
+}
+
+
+

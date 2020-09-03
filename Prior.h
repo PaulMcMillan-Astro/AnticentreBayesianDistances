@@ -41,9 +41,9 @@ class Basic_prior {
 
   double R, z, r;                      // Position in galaxy
   double l, b;                         // Galactic coords (radians)
+ public:
   double cosl, sinl, cosb, sinb;       // Saved for speed
   bool offgrid;                        // If out-of-range
- public:
   void prepare_sightline(double L, double B); // Setup new sightline (l,b)
   double prior(double s);                     // Return prior given s
   double prior_thin();                        // Thin disc component
@@ -129,6 +129,36 @@ class GRVS_prior {
 //   Dusty_prior(string type);
 //   ~Dusty_prior() {};
 // };
+
+
+/*-----------------------------------------------------------------------------
+*
+* Class: Anticentre_prior
+* Purpose: Gives probability p(s)ds, given l & b
+*   initially. Note that the density part is done by Basic_prior
+*
+*   P(s) \propto s**2 * density * P(s|selection)
+*
+* Currently: two options for photometric prior. Possibility to add more.
+*-----------------------------------------------------------------------------*/
+
+class Anticentre_prior {
+  Basic_prior Non_mag_prior;            // Handles density & s**2
+
+  public:
+  /*---------------- Parameters of the photometric prior  --------------------*/
+  double logscale;
+
+  void prepare_sightline(double, double);         // Setup new sightline (l,b)
+  double prior(double s_in);      // Return prior given s, G_RVS
+  double prior_select(double s_in);                             // Abs magnitude prior
+  void setup_basic();         
+  Anticentre_prior();                // Constructor - default prior
+  //Anticentre_prior(string type);     // Constructor - choice of prior
+  ~Anticentre_prior() {};            // Destructor
+};
+
+
 
 
 

@@ -53,14 +53,16 @@ Main programme
 int main(int argc, char *argv[] ) {
 // Prior chosen - can alter by hand
   Basic_prior Prior;
-  double l_min_deg,l_max_deg;
+  double l_min_deg,l_max_deg,b_max_deg;
   ofstream to;
-  if(argc==4) {
+  if(argc==5) {
     to.open(argv[1]);
     l_min_deg = atof(argv[2]);
     l_max_deg = atof(argv[3]);
+    b_max_deg = atof(argv[4]);
   } else {
-    cerr << "Usage: "<<argv[0]<<"outputname l_min_deg l_max_deg\n";
+    cerr << "Usage: "<<argv[0]<<" outputname l_min_deg l_max_deg b_max_deg\n";
+    cerr << "Usage: Symmetry about b=0 is assumed\n";
     return 1;
   }
   if (l_min_deg>=l_max_deg) {
@@ -68,7 +70,7 @@ int main(int argc, char *argv[] ) {
     return 1;
   }
   // input
-  double l_min=l_min_deg*deg2rad,l_max=l_max_deg*deg2rad,b_max=10*deg2rad,r_min=100, r_max=9900;
+  double l_min=l_min_deg*deg2rad,l_max=l_max_deg*deg2rad,b_max=b_max_deg*deg2rad,r_min=100, r_max=9900;
   int nr=50, nl=50, nb=1000;
   double integral[nr];  
 

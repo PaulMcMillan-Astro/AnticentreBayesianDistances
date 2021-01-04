@@ -4,4 +4,8 @@
 Old/
 *.o
 *.exe
-
+*.csv
+*.h5
+*.out?
+*.input
+*~
